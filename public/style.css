@@ -1,0 +1,13 @@
+body {
+  background-color: #7ccdca;
+};
+
+新規登録ボタン
+.sinki{ 
+  background-color: #F47766;　
+};
+
+ログインボタン
+.login{
+  background-color: #FFCD48;
+};
