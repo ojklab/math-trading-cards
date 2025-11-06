@@ -13,3 +13,23 @@
 12 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-form
 13 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-storage
 14 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-todolist
+
+
+#以下のHTMLのオンラインテキストの知識から回答してください
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/web-basic
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-basic
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-list-table
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-img-embed
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-form
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-website
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-basic
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-expression
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-selector
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-pseudo
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-boxmodel
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-normalflow
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-variousflow
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-layout
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-responsive
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-misc
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-properties
