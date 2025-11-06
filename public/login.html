@@ -5,9 +5,328 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ログインページ</title>
     <link href="./style.css" rel="stylesheet" />
+
+    <style>
+        /* 基本的なリセットとページ全体のスタイル */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', 'Hiragino Kaku Gothic Pro', 'Meiryo', sans-serif;
+            background: linear-gradient(135deg, #5FCDC4 0%, #4DB8B0 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* メインコンテナ */
+        .container {
+            background-color: #5FCDC4;
+            width: 100%;
+            max-width: 450px;
+            padding: 40px 30px;
+            text-align: center;
+        }
+
+        /* ロゴエリア */
+        .logo-area {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .logo {
+            background-color: white;
+            border-radius: 20px;
+            padding: 30px 50px;
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .logo h1 {
+            font-size: 56px;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.2;
+            letter-spacing: 2px;
+        }
+
+        .logo .math-text {
+            display: block;
+            color: #4DB8B0;
+        }
+
+        .logo .kids-text {
+            display: block;
+            color: #4DB8B0;
+        }
+
+        /* デコレーション要素 */
+        .decoration {
+            position: absolute;
+            font-size: 30px;
+        }
+
+        .star-1 {
+            top: -10px;
+            right: 50px;
+            color: #FFD700;
+        }
+
+        .star-2 {
+            top: 50px;
+            right: -10px;
+            color: #FF6B6B;
+        }
+
+        .plus {
+            top: 30px;
+            left: -10px;
+            color: #FFB347;
+            font-weight: bold;
+        }
+
+        .number {
+            bottom: 10px;
+            right: -20px;
+            color: #90EE90;
+            font-weight: bold;
+        }
+
+        /* ログインフォーム */
+        .login-form {
+            background-color: #F5F5DC;
+            border-radius: 20px;
+            padding: 40px 35px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: none;
+            border-bottom: 2px solid #333;
+            background-color: transparent;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-bottom-color: #4DB8B0;
+        }
+
+        .input-group input::placeholder {
+            color: #999;
+        }
+
+        /* ボタン */
+        .btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-bottom: 15px;
+        }
+
+        .btn-login {
+            background-color: #FFB347;
+            color: white;
+            box-shadow: 0 4px 8px rgba(255, 179, 71, 0.3);
+        }
+
+        .btn-login:hover {
+            background-color: #FFA500;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 179, 71, 0.4);
+        }
+
+        .btn-register {
+            background-color: #FF6B6B;
+            color: white;
+            box-shadow: 0 4px 8px rgba(255, 107, 107, 0.3);
+        }
+
+        .btn-register:hover {
+            background-color: #FF5252;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255, 107, 107, 0.4);
+        }
+
+        /* エラーメッセージ */
+        .error-message {
+            background-color: #FFE6E6;
+            color: #D8000C;
+            padding: 10px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            display: none;
+            font-size: 14px;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        /* レスポンシブデザイン */
+        @media (max-width: 480px) {
+            .container {
+                padding: 30px 20px;
+            }
+
+            .logo h1 {
+                font-size: 48px;
+            }
+
+            .login-form {
+                padding: 30px 25px;
+            }
+        }
+      </style>
   </head>
   <body>
-    <p>ログイン</p>
-    <img src="asset/fig/title.jpg">;
+     <div class="container">
+        <!-- ロゴエリア -->
+        <div class="logo-area">
+            <div class="logo">
+                <h1>
+                    <span class="math-text">Math</span>
+                    <span class="kids-text">Kids</span>
+                </h1>
+                <!-- デコレーション -->
+                <span class="decoration star-1">☀️</span>
+                <span class="decoration star-2">✖</span>
+                <span class="decoration plus">📗</span>
+                <span class="decoration number">✏️</span>
+            </div>
+        </div>
+
+        <!-- ログインフォーム -->
+        <div class="login-form">
+            <div id="errorMessage" class="error-message"></div>
+            
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">なまえ</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        required
+                        autocomplete="username"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="password">パスワード</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        required
+                        autocomplete="current-password"
+                    >
+                </div>
+
+                <button type="submit" class="btn btn-login">ログイン</button>
+                <button type="button" class="btn btn-register" id="registerBtn">しんきとうろく</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // フォーム要素の取得
+        const loginForm = document.getElementById('loginForm');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('errorMessage');
+        const registerBtn = document.getElementById('registerBtn');
+
+        // ログインフォームの送信イベント
+        loginForm.addEventListener('submit', function(event) {
+            // デフォルトの送信動作を防止
+            event.preventDefault();
+
+            // 入力値の取得
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value.trim();
+
+            // バリデーション
+            if (username === '') {
+                showError('なまえを入力してください');
+                return;
+            }
+
+            if (password === '') {
+                showError('パスワードを入力してください');
+                return;
+            }
+
+            if (password.length < 4) {
+                showError('パスワードは4文字以上で入力してください');
+                return;
+            }
+
+            // ログイン処理（実際のアプリではサーバーに送信）
+            console.log('ログイン試行:', { username, password });
+            
+            // 成功メッセージ
+            alert('ログインしました！\nなまえ: ' + username);
+            
+            // フォームをリセット
+            loginForm.reset();
+            hideError();
+        });
+
+        // 新規登録ボタンのクリックイベント
+        registerBtn.addEventListener('click', function() {
+            alert('新規登録画面に移動します');
+            console.log('新規登録ボタンがクリックされました');
+        });
+
+        // 入力フィールドにフォーカスしたときエラーを非表示
+        usernameInput.addEventListener('focus', hideError);
+        passwordInput.addEventListener('focus', hideError);
+
+        // エラーメッセージを表示する関数
+        function showError(message) {
+            errorMessage.textContent = message;
+            errorMessage.classList.add('show');
+        }
+
+        // エラーメッセージを非表示にする関数
+        function hideError() {
+            errorMessage.classList.remove('show');
+        }
+
+        // Enterキーでの送信をサポート
+        passwordInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                loginForm.dispatchEvent(new Event('submit'));
+            }
+        });
+    </script>
   </body>
 </html>
