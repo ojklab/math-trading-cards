@@ -207,126 +207,17 @@
       </style>
   </head>
   <body>
-     <div class="container">
-        <!-- ロゴエリア -->
-        <div class="logo-area">
-            <div class="logo">
-                <h1>
-                    <span class="math-text">Math</span>
-                    <span class="kids-text">Kids</span>
-                </h1>
-                <!-- デコレーション -->
-                <span class="decoration star-1">☀️</span>
-                <span class="decoration star-2">✖</span>
-                <span class="decoration plus">📗</span>
-                <span class="decoration number">✏️</span>
-            </div>
-        </div>
+    <img src="asset/fig/title.jpg" />;
+    <!-- 題名の画像をいれる -->
 
-        <!-- ログインフォーム -->
-        <div class="login-form">
-            <div id="errorMessage" class="error-message"></div>
-            
-            <form id="loginForm">
-                <div class="input-group">
-                    <label for="username">なまえ</label>
-                    <input 
-                        type="text" 
-                        id="username" 
-                        name="username" 
-                        required
-                        autocomplete="username"
-                    >
-                </div>
-
-                <div class="input-group">
-                    <label for="password">パスワード</label>
-                    <input 
-                        type="password" 
-                        id="password" 
-                        name="password" 
-                        required
-                        autocomplete="current-password"
-                    >
-                </div>
-
-                <button type="submit" class="btn btn-login">ログイン</button>
-                <button type="button" class="btn btn-register" id="registerBtn">しんきとうろく</button>
-            </form>
-        </div>
+    <div class="form-box">
+      <label for="name">なまえ</label>
+      <input type="text" id="name" name="name" />
+      <br />
+      <label for="password">パスワード</label>
+      <input type="password" id="password" name="password" />
+      <br />
+      <button class="btn">しんきとうろく</button>
     </div>
-
-    <script>
-        // フォーム要素の取得
-        const loginForm = document.getElementById('loginForm');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const errorMessage = document.getElementById('errorMessage');
-        const registerBtn = document.getElementById('registerBtn');
-
-        // ログインフォームの送信イベント
-        loginForm.addEventListener('submit', function(event) {
-            // デフォルトの送信動作を防止
-            event.preventDefault();
-
-            // 入力値の取得
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value.trim();
-
-            // バリデーション
-            if (username === '') {
-                showError('なまえを入力してください');
-                return;
-            }
-
-            if (password === '') {
-                showError('パスワードを入力してください');
-                return;
-            }
-
-            if (password.length < 4) {
-                showError('パスワードは4文字以上で入力してください');
-                return;
-            }
-
-            // ログイン処理（実際のアプリではサーバーに送信）
-            console.log('ログイン試行:', { username, password });
-            
-            // 成功メッセージ
-            alert('ログインしました！\nなまえ: ' + username);
-            
-            // フォームをリセット
-            loginForm.reset();
-            hideError();
-        });
-
-        // 新規登録ボタンのクリックイベント
-        registerBtn.addEventListener('click', function() {
-            alert('新規登録画面に移動します');
-            console.log('新規登録ボタンがクリックされました');
-        });
-
-        // 入力フィールドにフォーカスしたときエラーを非表示
-        usernameInput.addEventListener('focus', hideError);
-        passwordInput.addEventListener('focus', hideError);
-
-        // エラーメッセージを表示する関数
-        function showError(message) {
-            errorMessage.textContent = message;
-            errorMessage.classList.add('show');
-        }
-
-        // エラーメッセージを非表示にする関数
-        function hideError() {
-            errorMessage.classList.remove('show');
-        }
-
-        // Enterキーでの送信をサポート
-        passwordInput.addEventListener('keypress', function(event) {
-            if (event.key === 'Enter') {
-                loginForm.dispatchEvent(new Event('submit'));
-            }
-        });
-    </script>
   </body>
 </html>
