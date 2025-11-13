@@ -17,8 +17,15 @@ body {
   background-color: #e57865;
 }
 
-ログインボタン .login {
+.login {
   background-color: #ffcd48;
+  width: 100%;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  border: none;
+  border-radius: 30px;
 }
 
 ボタン .button {
