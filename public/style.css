@@ -2,9 +2,8 @@ body {
   background-color: #7ccdca;
 }
 
-新規登録ボタン
-.btn{ 
-  background-color: #F47766;　
+新規登録ボタン .btn {
+  background-color: #f47766;
   width: 100%;
   padding: 12px 0;
   font-size: 18px;
@@ -18,22 +17,19 @@ body {
   background-color: #e57865;
 }
 
-
-ログインボタン
-.login{
-  background-color: #FFCD48;
+ログインボタン .login {
+  background-color: #ffcd48;
 }
 
-ボタン
-.button{
+ボタン .button {
   background-color: #fef8ef;
 }
 
-.form-box{
-  width:450px;
-  height:250px;
+.form-box {
+  width: 450px;
+  height: 250px;
   background-color: #fef8ef;
-  border-radius:30px;
+  border-radius: 30px;
   margin: 0;
   text-align: left;
 }
@@ -47,7 +43,7 @@ body {
   margin-bottom: 30px;
 }
 
-label{
+label {
   display: block;
   margin-bottom: 10px;
   font-size: 18px;
