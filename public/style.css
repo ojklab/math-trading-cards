@@ -2,10 +2,9 @@ body {
   background-color: #7ccdca;
 }
 
-新規登録ボタン
 .btn{ 
   background-color: #F47766;　
-  width: 100%;
+  width:100%;
   padding: 12px 0;
   font-size: 18px;
   font-weight: bold;
@@ -19,9 +18,15 @@ body {
 }
 
 
-ログインボタン
 .login{
   background-color: #FFCD48;
+  width:100%;
+  padding: 12px 0;
+  font-size: 18px;
+  font-weight: bold;
+  color: black;
+  border: none;
+  border-radius: 30px;
 }
 
 ボタン
