@@ -1,16 +1,21 @@
 body {
   background-color: #7ccdca;
+  margin: 0;
+  padding: 0;
+  text-align: center;
 }
 
 .btn {
   background-color: #f47766;
-  width: 100%;
+  width: 70%;
   padding: 12px 0;
   font-size: 18px;
   font-weight: bold;
   color: black;
   border: none;
   border-radius: 30px;
+  display: block;
+  margin: 0 auto;
 }
 
 .btn:hover {
@@ -19,13 +24,14 @@ body {
 
 .login {
   background-color: #ffcd48;
-  width: 100%;
+  width: 90%;
   padding: 12px 0;
   font-size: 18px;
   font-weight: bold;
   color: black;
   border: none;
   border-radius: 30px;
+  margin: 0 auto;
 }
 
 ボタン .button {
@@ -34,20 +40,24 @@ body {
 
 .form-box {
   width: 450px;
-  height: 250px;
   background-color: #fef8ef;
   border-radius: 30px;
-  margin: 0;
+  margin: 0 auto;
+  padding: 30px;
+  box-sizing: border-box;
   text-align: left;
 }
 
 .form-box input {
   width: 100%;
+  box-sizing: border-box;
   padding: 10px 5px;
   font-size: 16px;
   border: none;
   border-bottom: 2px solid black;
   margin-bottom: 30px;
+  background-color: #fef8ef;
+  outline: none;
 }
 
 label {
