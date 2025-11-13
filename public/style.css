@@ -2,9 +2,9 @@ body {
   background-color: #7ccdca;
 }
 
-.btn{ 
-  background-color: #F47766;　
-  width:100%;
+.btn {
+  background-color: #f47766;
+  width: 100%;
   padding: 12px 0;
   font-size: 18px;
   font-weight: bold;
@@ -17,28 +17,19 @@ body {
   background-color: #e57865;
 }
 
+ログインボタン .login {
+  background-color: #ffcd48;
+}
 
-.login{
-  background-color: #FFCD48;
-  width:100%;
-  padding: 12px 0;
-  font-size: 18px;
-  font-weight: bold;
-  color: black;
-  border: none;
+ボタン .button {
+  background-color: #fef8ef;
+}
+
+.form-box {
+  width: 450px;
+  height: 250px;
+  background-color: #fef8ef;
   border-radius: 30px;
-}
-
-ボタン
-.button{
-  background-color: #fef8ef;
-}
-
-.form-box{
-  width:450px;
-  height:250px;
-  background-color: #fef8ef;
-  border-radius:30px;
   margin: 0;
   text-align: left;
 }
@@ -52,7 +43,7 @@ body {
   margin-bottom: 30px;
 }
 
-label{
+label {
   display: block;
   margin-bottom: 10px;
   font-size: 18px;
