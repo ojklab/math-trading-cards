@@ -1,0 +1,35 @@
+#以下のJavaScriptのオンラインテキストの知識から回答してください
+01 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-basic
+02 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-variable
+03 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-conditional
+04 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-loop
+05 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-array
+06 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-object
+07 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-function
+08 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-element
+09 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-attribute
+10 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-event
+11 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-slideshow
+12 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-form
+13 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-storage
+14 https://zenn.dev/ojk/books/intro-to-javascript/viewer/js-todolist
+
+
+#以下のHTMLのオンラインテキストの知識から回答してください
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/web-basic
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-basic
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-list-table
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-img-embed
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-form
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/html-website
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-basic
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-expression
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-selector
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-pseudo
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-boxmodel
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-normalflow
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-variousflow
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-layout
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-responsive
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-misc
+https://zenn.dev/ojk/books/intro-to-html-css/viewer/css-properties

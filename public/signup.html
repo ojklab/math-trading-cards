@@ -3,8 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>ユーザー登録</title>
-    <link href="./style.css" rel="stylesheet" />
+    <title>Math Kids - 算数学習アプリ</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
-  <body></body>
+  <body>
+    <!-- ログイン画面 -->
+    <div id="login-screen" class="screen">
+      <div class="container">
+        <div class="logo">
+          <h1>Math<br />Kids</h1>
+          <div class="stars">⭐️✨⭐️</div>
+        </div>
+
+        <div class="form-box">
+          <div class="form-group">
+            <label>なまえ</label>
+            <input type="text" id="username" placeholder="なまえを入力" />
+          </div>
+
+          <div class="form-group">
+            <label>パスワード</label>
+            <input type="password" id="password" placeholder="パスワードを入力" />
+          </div>
+
+          <button class="btn btn-primary" id="login-btn">ログイン</button>
+          <button class="btn btn-secondary" id="register-btn">しんきとうろく</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ホーム画面 -->
+    <div id="home-screen" class="screen" style="display: none">
+      <div class="container">
+        <div class="logo">
+          <h1>Math<br />Kids</h1>
+          <div class="stars">⭐️✨⭐️</div>
+        </div>
+
+        <div class="welcome-message">ようこそ、<span id="display-username"></span>さん！</div>
+
+        <div class="menu-buttons">
+          <button class="menu-btn" id="start-btn">スタート</button>
+          <button class="menu-btn" id="dictionary-btn">ずかん</button>
+          <button class="menu-btn" id="ranking-btn">せいせき・ランキング</button>
+          <button class="menu-btn" id="settings-btn">ユーザーせってい</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 算数問題画面 -->
+    <div id="game-screen" class="screen" style="display: none">
+      <div class="container">
+        <div class="game-header">
+          <div class="score-info">
+            <span>もんだい: <span id="question-number">1</span>/10</span>
+            <span>スコア: <span id="current-score">0</span></span>
+          </div>
+        </div>
+
+        <div class="question-box">
+          <h2 id="question-text">5 + 3 = ?</h2>
+        </div>
+
+        <div class="answer-buttons">
+          <button class="answer-btn" data-answer="0">0</button>
+          <button class="answer-btn" data-answer="1">1</button>
+          <button class="answer-btn" data-answer="2">2</button>
+          <button class="answer-btn" data-answer="3">3</button>
+        </div>
+
+        <button class="btn btn-back" id="back-to-home">ホームにもどる</button>
+      </div>
+    </div>
+
+    <!-- 成績画面 -->
+    <div id="ranking-screen" class="screen" style="display: none">
+      <div class="container">
+        <h2 class="screen-title">せいせき・ランキング</h2>
+
+        <div class="stats-box">
+          <div class="stat-item">
+            <span class="stat-label">そうもんだいすう:</span>
+            <span class="stat-value" id="total-questions">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">せいかいすう:</span>
+            <span class="stat-value" id="correct-answers">0</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">せいかいりつ:</span>
+            <span class="stat-value" id="accuracy-rate">0%</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">さいこうスコア:</span>
+            <span class="stat-value" id="high-score">0</span>
+          </div>
+        </div>
+
+        <button class="btn btn-primary" id="back-from-ranking">ホームにもどる</button>
+      </div>
+    </div>
+
+    <!-- 設定画面 -->
+    <div id="settings-screen" class="screen" style="display: none">
+      <div class="container">
+        <h2 class="screen-title">ユーザーせってい</h2>
+
+        <div class="settings-box">
+          <div class="setting-item">
+            <span>ユーザーめい: <strong id="settings-username"></strong></span>
+          </div>
+          <button class="btn btn-danger" id="logout-btn">ログアウト</button>
+          <button class="btn btn-warning" id="reset-data-btn">データをリセット</button>
+        </div>
+
+        <button class="btn btn-primary" id="back-from-settings">ホームにもどる</button>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
 </html>
