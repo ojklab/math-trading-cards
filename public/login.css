@@ -18,9 +18,11 @@ body {
   font-weight: bold;
   color: black;
   border: none;
-  border-radius: 30px;
+  border-radius: 15px;
   display: block;
   margin: 0 auto;
+
+  box-sizing: border-box;
 }
 
 .btn:hover {
@@ -35,7 +37,7 @@ body {
   font-weight: bold;
   color: black;
   border: none;
-  border-radius: 30px;
+  border-radius: 15px;
   margin: 0 auto 0.5em;
 }
 
