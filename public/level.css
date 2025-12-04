@@ -1,0 +1,181 @@
+/* 全体のリセットと基本設定 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* コンテンツを上部に寄せる */
+  min-height: 100vh;
+  background-color: #f0f0f0; /* 画像のページ全体の薄いグレー背景 */
+  color: #333;
+  box-sizing: border-box;
+  padding: 0; /* bodyのパディングを削除 */
+}
+
+/* ページ全体を囲むコンテナ (水色背景) */
+.page-container {
+  background-color: #7ccdca; /* 画像のメインコンテンツ領域の水色背景 */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px; /* コンテナ内の余白 */
+  min-height: 100vh; /* 画面いっぱいの高さを確保 */
+  box-sizing: border-box;
+}
+
+/* 画面上部のコントロール（もどるボタン） */
+.top-controls {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end; /* 右寄せ */
+  margin-bottom: 20px;
+}
+
+.back-button {
+  background-color: #fef8ef;
+  border: none;
+  border-radius: 15px;
+  padding: 8px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  color: #555;
+  font-weight: bold;
+}
+
+/* タイトルカード */
+.title-card {
+  background-color: #fef8ef;
+  border-radius: 15px;
+  padding: 10px 40px;
+  margin-bottom: 40px; /* 下方向の余白を調整 */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+  font-size: 32px;
+  font-weight: bold;
+  color: #333;
+  margin: 0;
+  white-space: nowrap; /* テキストの折り返しを防ぐ */
+}
+
+/* 難易度カードのコンテナ (横並び配置) */
+.difficulty-cards-container {
+  display: flex;
+  gap: 20px; /* カード間のスペース */
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap; /* 画面幅が狭い場合は折り返す */
+  padding: 0 10px; /* 左右に少し余白 */
+  box-sizing: border-box;
+}
+
+/* 個別の難易度カード */
+.difficulty-card {
+  flex: 1 1 calc(25% - 15px); /* 4列で表示、gap分を考慮 */
+  max-width: 200px; /* カードの最大幅を固定気味に */
+  background-color: #fef8ef; /* 薄いベージュ色 */
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px 15px; /* 上下左右のパディング調整 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+  text-align: center;
+  height: 320px; /* カードの高さを統一 */
+  box-sizing: border-box;
+}
+
+/* 星の表示エリア */
+.stars-display {
+  min-height: 80px; /* 星の表示エリアの高さ確保 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 25px; /* トピックグループとの間隔 */
+}
+
+.star {
+  font-size: 36px; /* 星のサイズを調整 */
+  color: #ffc107; /* 明るい黄色 */
+  margin: 0 2px;
+  line-height: 1;
+}
+
+/* トピックグループ */
+.topics-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px; /* トピック間のスペース */
+  width: 100%;
+  flex-grow: 1; /* 残りのスペースを埋める */
+  justify-content: flex-end; /* 下揃え */
+}
+
+/* 個別のトピック（計算内容）ラベル */
+.topic-label {
+  background-color: #e0e0e0; /* 薄いグレーの背景 */
+  color: #555;
+  border-radius: 30px;
+  padding: 8px 15px;
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  width: fit-content;
+}
+
+/* レスポンシブデザインの調整 */
+@media (max-width: 900px) {
+  .difficulty-card {
+    flex-basis: calc(33.333% - 13.333px); /* 3列表示 */
+    max-width: calc(33.333% - 13.333px);
+  }
+}
+
+@media (max-width: 700px) {
+  .difficulty-card {
+    flex-basis: calc(50% - 10px); /* 2列表示 */
+    max-width: calc(50% - 10px);
+    height: 300px; /* 高さを調整 */
+  }
+  .page-title {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    padding: 15px;
+  }
+  .title-card {
+    padding: 8px 25px;
+    margin-bottom: 30px;
+  }
+  .page-title {
+    font-size: 24px;
+  }
+  .difficulty-cards-container {
+    gap: 15px;
+    padding: 0;
+  }
+  .difficulty-card {
+    flex-basis: 100%; /* 1列表示 */
+    max-width: 280px; /* 中央に寄せるための最大幅 */
+    height: auto; /* 高さを内容に合わせる */
+    min-height: 280px; /* 最低限の高さを確保 */
+  }
+  .stars-display {
+    font-size: 32px;
+    min-height: 70px;
+    margin-bottom: 20px;
+  }
+  .topic-label {
+    font-size: 13px;
+    padding: 7px 12px;
+  }
+}

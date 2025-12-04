@@ -1,0 +1,153 @@
+/* フォント設定と基本的なリセット */
+body {
+  font-family: 'Inter', 'Noto Sans CJK JP', sans-serif;
+  background-color: #f0f0f0; /* 全体的な背景色 */
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden; /* 角丸の外に要素がはみ出さないように */
+}
+
+/* メインヘッダー */
+.main-header {
+  background-color: #90c9c7; /* 青緑系の背景色 */
+  padding: 16px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.main-header-title {
+  color: #333; /* 濃いグレー */
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.back-button {
+  background-color: #fff;
+  color: #333;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 9999px; /* 完全なカプセル形状 */
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.back-button:hover {
+  background-color: #eee;
+}
+
+/* カードコンテナエリア */
+.card-area {
+  background-color: #f3e9d8; /* 薄いクリーム色の背景 */
+  padding: 30px;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr); /* 5列グリッド */
+  gap: 15px; /* カード間のスペース */
+}
+
+/* カードデザイン */
+.card {
+  background-color: #ffffff;
+  border: 2px solid #d4a373; /* 薄茶色の枠線 */
+  border-radius: 10px;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.1s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* レベル表示 */
+.card-level {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #d4a373; /* 枠線と同じ薄茶色 */
+  color: white;
+  padding: 2px 10px;
+  border-radius: 9999px;
+  font-size: 10px;
+  font-weight: bold;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  white-space: nowrap;
+}
+
+/* イラスト部分のプレースホルダー */
+.card-image-placeholder {
+  width: 100%;
+  height: 80px; /* イラストの高さ */
+  background-color: #e6f7ff; /* 薄い水色 */
+  border-radius: 6px;
+  margin-top: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6c757d;
+  font-size: 12px;
+  line-height: 1.2;
+  overflow: hidden;
+  position: relative;
+}
+
+/* 象のイラストをイメージしたシンプルなSVG */
+.elephant-icon {
+  color: #555;
+  font-size: 40px;
+}
+
+.card-name {
+  margin-top: 8px;
+  font-size: 12px;
+  font-weight: bold;
+  color: #333;
+  letter-spacing: 0.5px;
+}
+
+/* ステータス部分 */
+.card-stats {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fff8e1; /* 非常に薄い黄色 */
+  border: 1px solid #d4a373;
+  border-radius: 4px;
+  padding: 2px 5px;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-weight: bold;
+  color: #555;
+  margin-bottom: 1px;
+}
