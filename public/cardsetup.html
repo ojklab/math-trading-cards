@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>カード設定</title>
+
+    <style>
+      /* 全体の基本設定 */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        background-color: #a9e1dd; /* 水色背景 */
+        color: #333;
+        box-sizing: border-box;
+        padding: 20px;
+      }
+
+      .page-container {
+        width: 100%;
+        max-width: 960px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        box-sizing: border-box;
+      }
+
+      /* もどるボタン */
+      .top-controls {
+        width: 100%;
+        display: flex;
+        justify-content: flex-end;
+      }
+
+      .back-button {
+        background-color: #ffffff;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #555;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      /* カードとメッセージのコンテナ */
+      .card-area-container {
+        display: flex;
+        align-items: flex-start;
+        gap: 50px;
+        margin-top: 50px;
+      }
+
+      /* モンスターカード本体: サイズ拡大 */
+      .monster-card {
+        width: 380px; /* 300pxから380pxに拡大 */
+        background-color: #f7f3e8;
+        border: 12px solid #d69752; /* 枠の太さも調整 */
+        border-radius: 25px; /* 角丸も調整 */
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      /* カードヘッダー（レベル） */
+      .card-header {
+        background-color: #f0a050;
+        width: 100%;
+        padding: 12px 0; /* パディングを調整 */
+        border-radius: 13px 13px 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+        font-size: 20px; /* フォントサイズを調整 */
+      }
+
+      .level-label {
+        font-size: 16px;
+        margin-right: 8px;
+      }
+
+      .level-value {
+        font-size: 30px; /* フォントサイズを調整 */
+      }
+
+      /* 画像エリア: 高さ拡大 */
+      .image-section {
+        background-color: #d8d8d8;
+        padding: 10px;
+        width: 90%;
+        height: 250px; /* 180pxから250pxに拡大 */
+        margin: 15px 0;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .monster-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        filter: grayscale(100%);
+        opacity: 0.8;
+      }
+
+      /* 変更ボタン（画像上） */
+      .change-button {
+        position: absolute;
+        background-color: rgba(100, 100, 100, 0.7);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        padding: 7px 18px; /* パディングを調整 */
+        font-size: 18px; /* フォントサイズを調整 */
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        z-index: 10;
+      }
+
+      .image-change-button {
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+
+      /* モンスター名エリア */
+      .name-section {
+        background-color: #e0d1b0;
+        width: 90%;
+        padding: 10px 10px; /* パディングを調整 */
+        margin-bottom: 15px; /* 余白を調整 */
+        border-radius: 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #333;
+        font-weight: bold;
+        font-size: 20px; /* フォントサイズを調整 */
+        position: relative;
+      }
+
+      .name-change-button {
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: rgba(100, 100, 100, 0.7);
+        font-size: 16px; /* フォントサイズを調整 */
+        padding: 4px 12px;
+        border-radius: 8px;
+      }
+
+      /* ステータスエリア */
+      .status-section {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        padding: 10px 0 25px 0; /* 余白を調整 */
+        gap: 10px;
+      }
+
+      .status-item {
+        background-color: #f7f3e8;
+        border: 3px solid #d69752;
+        border-radius: 12px; /* 角丸を調整 */
+        width: 120px; /* 幅を調整 */
+        padding: 8px; /* パディングを調整 */
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      .status-label {
+        font-size: 14px;
+        font-weight: bold;
+        color: #666;
+      }
+
+      .status-value {
+        font-size: 24px; /* フォントサイズを調整 */
+        font-weight: bold;
+        color: #333;
+      }
+
+      /* 進化メッセージエリア */
+      .evolution-message {
+        display: flex;
+        align-items: center;
+        margin-top: 150px;
+        gap: 15px; /* 間隔を調整 */
+        font-size: 22px; /* フォントサイズを調整 */
+      }
+
+      .evolution-progress-box {
+        width: 120px; /* サイズを調整 */
+        height: 70px;
+        background-color: #f0a050;
+        border-radius: 10px;
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      /* レスポンシブ調整 */
+      @media (max-width: 650px) {
+        .card-area-container {
+          flex-direction: column;
+          align-items: center;
+          gap: 30px;
+          margin-top: 20px;
+        }
+        .evolution-message {
+          margin-top: 0;
+        }
+        .monster-card {
+          width: 320px; /* 小さい画面では少し小さめに */
+          border: 10px solid #d69752;
+        }
+        .image-section {
+          height: 200px;
+        }
+        .status-item {
+          width: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container card-setting-page">
+      <div class="top-controls">
+        <button class="back-button">もどる</button>
+      </div>
+
+      <div class="card-area-container">
+        <div class="monster-card">
+          <div class="card-header">
+            <span class="level-label">LEVEL</span>
+            <span id="card-level" class="level-value">3</span>
+          </div>
+
+          <div class="image-section">
+            <img id="monster-image" src="elephant.png" alt="エレファント" class="monster-image" />
+
+            <button id="image-change-button" class="change-button image-change-button">へんこう</button>
+          </div>
+
+          <div class="name-section">
+            <span id="monster-name">ELEPHANT</span>
+            <button id="name-change-button" class="change-button name-change-button">へんこう</button>
+          </div>
+
+          <div class="status-section">
+            <div class="status-item hp">
+              <span class="status-label">HP</span>
+              <span class="status-value">10</span>
+            </div>
+            <div class="status-item power">
+              <span class="status-label">POWER</span>
+              <span class="status-value">5</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="evolution-message">
+          <p>あと</p>
+          <div class="evolution-progress-box"></div>
+          <p>で進化！</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 画像変更機能
+
+      // 変更可能な画像のリスト (デモ用。実際には正しいURLが必要です)
+      const imagePaths = ['elephant.png', 'lion.png', 'monkey.png', 'tiger.png'];
+      let currentImageIndex = 0;
+
+      // 要素の取得 (js-element)
+      const imageChangeButton = document.getElementById('image-change-button');
+      const monsterImage = document.getElementById('monster-image');
+
+      // 画像変更を実行する関数 (js-function)
+      function changeMonsterImage() {
+        // インデックスを更新
+        currentImageIndex = (currentImageIndex + 1) % imagePaths.length;
+
+        const newImagePath = imagePaths[currentImageIndex];
+
+        // 画像の src 属性を変更する (js-attribute)
+        monsterImage.setAttribute('src', newImagePath);
+        monsterImage.setAttribute('alt', newImagePath.replace('.png', ''));
+      }
+
+      // イベントリスナーの設定 (js-event)
+      imageChangeButton.addEventListener('click', changeMonsterImage);
+    </script>
+  </body>
+</html>
