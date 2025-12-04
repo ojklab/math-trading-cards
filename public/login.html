@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ログインページ</title>
     <link href="./login.css" rel="stylesheet" />
+
+    <style>
+      button a {
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: black;
+      }
+    </style>
   </head>
   <body>
     <img src="asset/fig/title.jpg" />;
@@ -19,9 +29,9 @@
       <br />
     </div>
     <div class="button-box">
-      <button onclick="location.href='index.html'" class="login">ログイン</button>
+      <button class="login"><a href="index.html">ログイン</a></button>
       <br />
-      <button onclick="location.href='signup.html'" class="btn">しんきとうろく</button>
+      <button class="btn"><a href="signup.html">しんきとうろく</a></button>
     </div>
   </body>
 </html>
