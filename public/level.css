@@ -14,7 +14,7 @@ body {
 
 /* ページ全体を囲むコンテナ (水色背景) */
 .page-container {
-  background-color: #a9e1dd; /* 画像のメインコンテンツ領域の水色背景 */
+  background-color: #7ccdca; /* 画像のメインコンテンツ領域の水色背景 */
   width: 100%;
   max-width: 960px; /* PCでの最大幅を制限 */
   display: flex;
@@ -34,7 +34,7 @@ body {
 }
 
 .back-button {
-  background-color: #ffffff; /* 白いボタン */
+  background-color: #fef8ef;
   border: none;
   border-radius: 20px;
   padding: 8px 20px;
@@ -47,7 +47,7 @@ body {
 
 /* タイトルカード */
 .title-card {
-  background-color: #ffffff;
+  background-color: #fef8ef;
   border-radius: 30px; /* より丸みを帯びた形状 */
   padding: 10px 40px;
   margin-bottom: 40px; /* 下方向の余白を調整 */
@@ -77,7 +77,7 @@ body {
 .difficulty-card {
   flex: 1 1 calc(25% - 15px); /* 4列で表示、gap分を考慮 */
   max-width: 200px; /* カードの最大幅を固定気味に */
-  background-color: #fffdf8; /* 薄いベージュ色 */
+  background-color: #fef8ef; /* 薄いベージュ色 */
   border-radius: 15px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px 15px; /* 上下左右のパディング調整 */
