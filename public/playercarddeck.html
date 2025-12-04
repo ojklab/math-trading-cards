@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>相手のデッキ表示</title>
+
+    <style>
+      /* 全体の基本設定 */
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        margin: 0;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        min-height: 100vh;
+        background-color: #f0f0f0; /* ページの外側の薄いグレー */
+        color: #333;
+        box-sizing: border-box;
+        padding: 20px;
+      }
+
+      .page-container {
+        background-color: #a9e1dd; /* メインの水色背景 */
+        width: 100%;
+        max-width: 900px;
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+        border-radius: 10px;
+        box-sizing: border-box;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      /* ヘッダーエリア */
+      .header-label {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 5px;
+        align-self: flex-start;
+      }
+
+      .deck-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: 0 10px 20px 10px;
+      }
+
+      .deck-title {
+        font-size: 30px;
+        font-weight: bold;
+        color: #333;
+        margin: 0;
+      }
+
+      .back-button {
+        background-color: #ffffff;
+        border: none;
+        border-radius: 20px;
+        padding: 8px 20px;
+        font-size: 14px;
+        cursor: pointer;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        color: #555;
+        font-weight: bold;
+        white-space: nowrap;
+      }
+
+      /* カードのグリッド配置コンテナ (白い背景) */
+      .card-wrapper {
+        background-color: #fffdf8; /* カードの白い背景色 */
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.05);
+        width: 100%;
+        box-sizing: border-box;
+      }
+
+      .deck-grid {
+        display: grid;
+        /* 3列で均等な幅に配置 */
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px; /* カード間の間隔 */
+        justify-items: center;
+      }
+
+      /* モンスターカード本体 */
+      .monster-card {
+        width: 100%;
+        max-width: 180px; /* 1枚あたりの最大幅を制限 */
+        background-color: #f7f3e8; /* カードの本体色 */
+        border: 8px solid #d69752; /* 外枠の茶色 */
+        border-radius: 15px;
+        box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 0 auto; /* 中央揃え */
+      }
+
+      /* カードヘッダー（レベル） */
+      .card-header {
+        background-color: #f0a050; /* レベルエリアのオレンジ色 */
+        width: 100%;
+        padding: 5px 0;
+        border-radius: 7px 7px 0 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: #fff;
+        font-weight: bold;
+        font-size: 16px;
+      }
+
+      .level-label {
+        font-size: 12px;
+        margin-right: 5px;
+      }
+
+      .level-value {
+        font-size: 20px;
+      }
+
+      /* 画像エリア */
+      .image-section {
+        background-color: #d8d8d8;
+        padding: 8px;
+        width: 85%;
+        height: 80px;
+        margin: 5px 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+
+      .monster-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+      }
+
+      /* モンスター名エリア */
+      .name-section {
+        background-color: #e0d1b0;
+        width: 85%;
+        padding: 4px 5px;
+        margin-bottom: 5px;
+        border-radius: 3px;
+        color: #333;
+        font-weight: bold;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      /* ステータスエリア */
+      .status-section {
+        display: flex;
+        justify-content: space-around;
+        width: 100%;
+        padding: 5px 0 10px 0;
+        gap: 5px;
+      }
+
+      .status-item {
+        background-color: #f7f3e8;
+        border: 2px solid #d69752;
+        border-radius: 8px;
+        width: 40%;
+        padding: 3px;
+        text-align: center;
+      }
+
+      .status-label {
+        font-size: 10px;
+        font-weight: bold;
+        color: #666;
+      }
+
+      .status-value {
+        font-size: 14px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      /* レスポンシブ調整 */
+      @media (max-width: 700px) {
+        .deck-grid {
+          grid-template-columns: repeat(2, 1fr); /* 2列表示 */
+        }
+        .deck-title {
+          font-size: 24px;
+        }
+      }
+      @media (max-width: 450px) {
+        .deck-grid {
+          grid-template-columns: 1fr; /* 1列表示 */
+        }
+        .card-wrapper {
+          padding: 15px;
+        }
+        .monster-card {
+          max-width: 250px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page-container">
+      <div class="header-label">相手のデッキ表示</div>
+
+      <div class="deck-header">
+        <h1 class="deck-title">〇〇のデッキ</h1>
+        <button class="back-button">もどる</button>
+      </div>
+
+      <div class="card-wrapper">
+        <div class="deck-grid">
+          <div class="monster-card">
+            <div class="card-header">
+              <span class="level-label">LEVEL</span>
+              <span class="level-value">3</span>
+            </div>
+            <div class="image-section">
+              <img src="elephant.png" alt="エレファント" class="monster-image" />
+            </div>
+            <div class="name-section">
+              <span>ELEPHANT</span>
+            </div>
+            <div class="status-section">
+              <div class="status-item hp">
+                <span class="status-label">HP</span>
+                <span class="status-value">10</span>
+              </div>
+              <div class="status-item power">
+                <span class="status-label">POWER</span>
+                <span class="status-value">5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="monster-card">
+            <div class="card-header">
+              <span class="level-label">LEVEL</span>
+              <span class="level-value">3</span>
+            </div>
+            <div class="image-section">
+              <img src="elephant.png" alt="エレファント" class="monster-image" />
+            </div>
+            <div class="name-section">
+              <span>ELEPHANT</span>
+            </div>
+            <div class="status-section">
+              <div class="status-item hp">
+                <span class="status-label">HP</span>
+                <span class="status-value">10</span>
+              </div>
+              <div class="status-item power">
+                <span class="status-label">POWER</span>
+                <span class="status-value">5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="monster-card">
+            <div class="card-header">
+              <span class="level-label">LEVEL</span>
+              <span class="level-value">3</span>
+            </div>
+            <div class="image-section">
+              <img src="elephant.png" alt="エレファント" class="monster-image" />
+            </div>
+            <div class="name-section">
+              <span>ELEPHANT</span>
+            </div>
+            <div class="status-section">
+              <div class="status-item hp">
+                <span class="status-label">HP</span>
+                <span class="status-value">10</span>
+              </div>
+              <div class="status-item power">
+                <span class="status-label">POWER</span>
+                <span class="status-value">5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="monster-card">
+            <div class="card-header">
+              <span class="level-label">LEVEL</span>
+              <span class="level-value">3</span>
+            </div>
+            <div class="image-section">
+              <img src="elephant.png" alt="エレファント" class="monster-image" />
+            </div>
+            <div class="name-section">
+              <span>ELEPHANT</span>
+            </div>
+            <div class="status-section">
+              <div class="status-item hp">
+                <span class="status-label">HP</span>
+                <span class="status-value">10</span>
+              </div>
+              <div class="status-item power">
+                <span class="status-label">POWER</span>
+                <span class="status-value">5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="monster-card">
+            <div class="card-header">
+              <span class="level-label">LEVEL</span>
+              <span class="level-value">3</span>
+            </div>
+            <div class="image-section">
+              <img src="elephant.png" alt="エレファント" class="monster-image" />
+            </div>
+            <div class="name-section">
+              <span>ELEPHANT</span>
+            </div>
+            <div class="status-section">
+              <div class="status-item hp">
+                <span class="status-label">HP</span>
+                <span class="status-value">10</span>
+              </div>
+              <div class="status-item power">
+                <span class="status-label">POWER</span>
+                <span class="status-value">5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="monster-card">
+            <div class="card-header">
+              <span class="level-label">LEVEL</span>
+              <span class="level-value">3</span>
+            </div>
+            <div class="image-section">
+              <img src="elephant.png" alt="エレファント" class="monster-image" />
+            </div>
+            <div class="name-section">
+              <span>ELEPHANT</span>
+            </div>
+            <div class="status-section">
+              <div class="status-item hp">
+                <span class="status-label">HP</span>
+                <span class="status-value">10</span>
+              </div>
+              <div class="status-item power">
+                <span class="status-label">POWER</span>
+                <span class="status-value">5</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
