@@ -26,10 +26,9 @@ body {
 
 /* 画面上部のコントロール（もどるボタン） */
 .top-controls {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end; /* 右寄せ */
-  margin-bottom: 20px;
+  position: fixed; /* ← 画面に固定 */
+  top: 30px; /* ← 上からの距離 */
+  right: 30px; /* ← 右からの距離 */
 }
 
 .back-button {
