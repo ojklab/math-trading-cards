@@ -28,7 +28,7 @@ body {
 }
 
 .back-button {
-  background-color: #f0f0f0;
+  background-color: #fef8ef;
   border: none;
   border-radius: 20px;
   padding: 8px 20px;
@@ -48,7 +48,7 @@ body {
 }
 
 .profile-card {
-  background-color: #ffffff;
+  background-color: #fef8ef;
   border-radius: 15px;
   padding: 30px 40px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -82,7 +82,7 @@ body {
 .input-field {
   flex-grow: 1;
   border: none;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid black;
   padding: 5px 0;
   font-size: 18px;
   color: #555;
@@ -128,14 +128,14 @@ body {
 
 .data-label {
   font-size: 14px;
-  color: #666;
+  color: black;
   margin-bottom: 5px;
 }
 
 .data-value {
   font-size: 22px;
   font-weight: bold;
-  color: #333;
+  color: black;
   margin-bottom: 5px; /* 下線とのスペース */
   min-width: 100px; /* 値の表示幅を確保 */
   text-align: left;
@@ -144,7 +144,7 @@ body {
 .underline {
   width: 100%;
   height: 2px;
-  background-color: #ddd;
+  background-color: black;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -160,7 +160,7 @@ body {
 
 .comment-section .current-comment-text {
   flex-grow: 1;
-  border-bottom: 2px solid #ddd;
+  border-bottom: 2px solid black;
   padding: 5px 0;
   font-size: 18px;
   color: #555;
