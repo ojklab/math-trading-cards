@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <button class="back-btn" onclick="goBack()">もどる</button>
+    <button class="back-btn"><a href="index.html">もどる</a></button>
 
     <div class="container">
       <h1>バトルのけっか</h1>
@@ -19,7 +19,7 @@
       <div class="row">レベル</div>
       <div class="box" id="levelBox">Lv.1</div>
 
-      <button class="retry-btn" onclick="retry()">リトライ</button>
+      <button class="retry-btn"><a href="battle.html">リトライ</a></button>
     </div>
 
     <script>
@@ -29,17 +29,6 @@
 
       document.getElementById('scoreBox').textContent = `${score} 点`;
       document.getElementById('levelBox').textContent = `Lv.${level}`;
-
-      /* ====== 「もどる」ボタン ====== */
-      function goBack() {
-        window.location.href = 'index.html';
-      }
-
-      /* ====== リトライボタン ====== */
-      function retry() {
-        // そのままバトル画面へ
-        window.location.href = 'battle.html';
-      }
     </script>
   </body>
 </html>
