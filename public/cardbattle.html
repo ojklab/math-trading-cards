@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ゲーム画面再現</title>
+    <link href="./cardbattle.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-column">
+        <div class="enemy-area">
+          <div class="card enemy-card">てき</div>
+          <div class="text-info">HP 30</div>
+          <div class="text-info" style="font-size: 14px">+100(スコア)</div>
+        </div>
+
+        <div class="player-area">
+          <div class="card player-card-mock">
+            <div class="card-level">LEVEL 3</div>
+            <div class="card-image-placeholder">🐘</div>
+            <div class="card-name">ELEPHANT</div>
+            <div class="card-stats">
+              <div class="stat-box">HP<br />10</div>
+              <div class="stat-box">POWER<br />5</div>
+            </div>
+          </div>
+          <div class="text-info">HP 30 なまえ</div>
+          <div class="text-info">Next ××</div>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="timer" id="timer">のこり : 0 : 3 0</div>
+
+        <div class="question-area card">1 + 2 = ?</div>
+
+        <div class="numpad-area card numpad-grid">
+          <button class="num-btn">1</button>
+          <button class="num-btn">2</button>
+          <button class="num-btn">3</button>
+          <button class="num-btn">4</button>
+          <button class="num-btn">5</button>
+          <button class="num-btn">←</button>
+
+          <button class="num-btn">6</button>
+          <button class="num-btn">7</button>
+          <button class="num-btn">8</button>
+          <button class="num-btn">9</button>
+          <button class="num-btn">0</button>
+          <button class="num-btn">〇</button>
+        </div>
+
+        <div class="gauge-wrapper">
+          <div class="gauge-label">必殺技なまえ</div>
+          <div class="gauge-bar-bg">
+            <div class="gauge-bar-fill">ゲージ</div>
+          </div>
+        </div>
+
+        <button class="go-button">go!</button>
+      </div>
+    </div>
+  </body>
+</html>
