@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Math Game UI (Big Cards)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* --- ベース設定 --- */
+      * {
+        box-sizing: border-box;
+        user-select: none;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #78c9c9;
+        height: 100vh;
+        width: 100vw;
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+        color: #444;
+        overflow: hidden;
+      }
+
+      .game-screen {
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        max-width: 1200px; /* 全体の最大幅も少し緩和 */
+        margin: 0 auto;
+      }
+
+      /* --- ヘッダー --- */
+      .header {
+        text-align: right;
+        padding-right: 20px;
+        margin-bottom: 10px;
+        flex-shrink: 0;
+      }
+
+      .timer-text {
+        font-size: 24px;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .timer-text::after {
+        content: '';
+        position: absolute;
+        bottom: 2px;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background-color: #007bff;
+      }
+
+      /* --- メインエリア --- */
+      .main-area {
+        display: flex;
+        flex: 1;
+        gap: 20px;
+        height: 100%;
+      }
+
+      /* 左カラム（カードエリア）の幅を拡張 */
+      .left-col {
+        width: 320px; /* 220px -> 320px に拡大 */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 10px;
+        flex-shrink: 0; /* 画面が狭くなってもカード幅を維持 */
+      }
+
+      .right-col {
+        flex: 1;
+        display: flex;
+        gap: 20px;
+        position: relative;
+      }
+
+      /* --- 敵カード（サイズアップ） --- */
+      .enemy-card {
+        width: 100%;
+        max-width: 240px; /* 160px -> 240px に拡大 */
+        aspect-ratio: 1 / 1;
+        background-color: #fff;
+        border-radius: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 32px; /* 文字サイズ調整 */
+        margin-bottom: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .stats-text {
+        width: 100%;
+        max-width: 240px; /* カード幅に合わせる */
+        font-size: 16px;
+        margin-bottom: 10px;
+        padding-left: 5px;
+        color: #333;
+      }
+      .stats-text small {
+        font-size: 12px;
+        opacity: 0.8;
+      }
+
+      /* --- プレイヤーカード（サイズアップ） --- */
+      .card-stack {
+        position: relative;
+        width: 100%;
+        max-width: 240px; /* 160px -> 240px に拡大 */
+        aspect-ratio: 3 / 4;
+        margin-top: 10px;
+      }
+
+      .p-card {
+        width: 100%;
+        height: 100%;
+        border-radius: 15px;
+        border: 3px solid #e6d2b6;
+        background-color: #fdf1dc;
+        position: absolute;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+      }
+
+      .p-card:nth-child(1) {
+        top: 0;
+        left: 14%;
+        z-index: 1;
+        transform: scale(0.95);
+      }
+      .p-card:nth-child(2) {
+        top: 0;
+        left: 7%;
+        z-index: 2;
+        transform: scale(0.98);
+      }
+      .p-card:nth-child(3) {
+        top: 0;
+        left: 0;
+        z-index: 3;
+      }
+
+      .main-card {
+        display: flex;
+        flex-direction: column;
+        padding: 8px; /* パディング少し増やす */
+        border: 5px solid #fdf1dc;
+        background: #fff;
+        outline: 3px solid #e0c09e;
+      }
+
+      /* カード内の文字サイズ調整 */
+      .card-header {
+        background-color: #eb9656;
+        color: white;
+        font-size: 14px; /* サイズアップ */
+        font-weight: bold;
+        text-align: center;
+        border-radius: 10px;
+        padding: 4px 10px;
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .card-img-placeholder {
+        flex: 1;
+        background-color: #cce3e9;
+        border-radius: 8px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 70px; /* アイコンサイズアップ */
+        margin-bottom: 8px;
+      }
+
+      .card-name {
+        background-color: #e6d2b6;
+        font-size: 14px; /* サイズアップ */
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 6px;
+        padding: 3px 0;
+        border: 1px solid #c4a484;
+      }
+
+      .card-info {
+        display: flex;
+        justify-content: space-between;
+        gap: 4px;
+      }
+
+      .info-box {
+        border: 1px solid #c4a484;
+        flex: 1;
+        text-align: center;
+        font-size: 12px; /* サイズアップ */
+        background-color: #fdf1dc;
+        border-radius: 4px;
+        padding: 2px 0;
+      }
+      .info-box span {
+        display: block;
+        font-weight: bold;
+        font-size: 14px;
+      }
+
+      /* --- 吹き出し（問題） --- */
+      .question-area {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        height: 100%;
+      }
+
+      .speech-bubble {
+        background-color: #fffdf8;
+        border-radius: 20px;
+        padding: 30px;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 6vmin;
+        color: #333;
+        flex: 0 0 25%;
+        box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.05);
+      }
+
+      .speech-bubble::before {
+        content: '';
+        position: absolute;
+        left: -20px;
+        top: 40%;
+        border-style: solid;
+        border-width: 15px 25px 15px 0;
+        border-color: transparent #fffdf8 transparent transparent;
+      }
+
+      /* --- テンキー --- */
+      .keypad-container {
+        background-color: #fffdf8;
+        border-radius: 20px;
+        padding: 20px;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .keypad {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .key {
+        width: 100%;
+        height: 100%;
+        background-color: #ebcfb4;
+        border: none;
+        border-radius: 12px;
+        font-size: 28px;
+        color: #333;
+        cursor: pointer;
+        font-family: 'M PLUS Rounded 1c', sans-serif;
+        box-shadow: 0 5px 0 #d1b090;
+        transition: transform 0.1s, box-shadow 0.1s;
+      }
+
+      .key:active {
+        transform: translateY(5px);
+        box-shadow: none;
+      }
+
+      .key.special {
+        background-color: #e68a45;
+        color: white;
+        box-shadow: 0 5px 0 #b96a30;
+      }
+
+      /* --- 右側のバー --- */
+      .bar-area {
+        width: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-end;
+        position: relative;
+        padding-bottom: 20px;
+      }
+
+      .vertical-bar {
+        width: 50px;
+        height: 100%;
+        background-color: #fff;
+        border-radius: 25px;
+        position: relative;
+        overflow: hidden;
+        border: 4px solid #fff;
+      }
+
+      .bar-fill {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 90%;
+        background-color: #f27565;
+      }
+
+      .go-circle {
+        width: 70px;
+        height: 70px;
+        background-color: #f27565;
+        border-radius: 50%;
+        position: absolute;
+        bottom: 30px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 24px;
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        z-index: 10;
+      }
+
+      .bottom-deco {
+        position: absolute;
+        bottom: 0px;
+        right: 43px;
+        width: 2px;
+        height: 30px;
+        background-color: #fff;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="game-screen">
+      <div class="header">
+        <span class="timer-text">のこり : 0 : 30</span>
+      </div>
+
+      <div class="main-area">
+        <div class="left-col">
+          <div class="enemy-card">てき</div>
+          <div class="stats-text">HP 30 <small>+100(スコア)</small></div>
+
+          <div class="card-stack">
+            <div class="p-card"></div>
+            <div class="p-card"></div>
+            <div class="p-card main-card">
+              <div class="card-header"><span>LEVEL</span> <span>3</span></div>
+              <div class="card-img-placeholder">🐘</div>
+              <div class="card-name">ELEPHANT</div>
+              <div class="card-info">
+                <div class="info-box">HP<br /><span>10</span></div>
+                <div class="info-box">POWER<br /><span>5</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="stats-text" style="margin-top: 5px">HP 30 なまえ</div>
+        </div>
+
+        <div class="right-col">
+          <div class="question-area">
+            <div class="speech-bubble">1 + 2 = ?</div>
+            <div class="keypad-container">
+              <div class="keypad">
+                <button class="key">1</button>
+                <button class="key">2</button>
+                <button class="key">3</button>
+                <button class="key">4</button>
+                <button class="key">5</button>
+                <button class="key">6</button>
+                <button class="key">7</button>
+                <button class="key">8</button>
+                <button class="key">9</button>
+                <button class="key">0</button>
+                <button class="key special">←</button>
+                <button class="key special">○</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="bar-area">
+            <div class="vertical-bar">
+              <div class="bar-fill"></div>
+            </div>
+            <div class="go-circle">go!</div>
+            <div class="bottom-deco"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
