@@ -253,6 +253,17 @@
       }
 
       document.querySelector('.go-btn').addEventListener('click', addGauge);
+
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        timerEl.textContent = 'のこり：0:00';
+
+        // ★ 結果画面へ移動
+        window.location.href = 'result.html';
+      }
+
+      localStorage.setItem('score', 100); // ←実際のスコア
+      localStorage.setItem('level', 3); // ←実際のレベル
     </script>
   </body>
 </html>
