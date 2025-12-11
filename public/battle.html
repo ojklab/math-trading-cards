@@ -183,7 +183,7 @@
         </div>
 
         <div class="right-area">
-          <div class="question-box">1 + 2 = ?</div>
+          <div class="question-box" id="questionBox">1 + 2 = ?</div>
 
           <div class="number-pad">
             <div>1</div>
@@ -197,7 +197,7 @@
             <div>8</div>
             <div>9</div>
             <div>0</div>
-            <div>○</div>
+            <div class="confirm-btn">○</div>
           </div>
 
           <div class="gauge-area">
@@ -211,42 +211,79 @@
       </div>
     </div>
 
-    <!-- ⭐ ここに JavaScript を配置するとすべて動く！ -->
     <script>
-      // ===================================
-      // タイマー
-      // ===================================
-      let timeLeft = 30;
-      const timerEl = document.querySelector('.timer');
+      //------------------------------------
+      // 九九問題ランダム生成
+      //------------------------------------
+      function makeQuestionTypeA() {
+        let a = Math.floor(Math.random() * 9) + 1;
+        let b = Math.floor(Math.random() * 9) + 1;
+        return { text: `${a} × ${b} ＝ ?`, answer: a * b };
+      }
 
-      const timer = setInterval(() => {
-        timeLeft--;
-        timerEl.textContent = `のこり：0:${String(timeLeft).padStart(2, '0')}`;
+      function makeQuestionTypeB() {
+        let a = Math.floor(Math.random() * 9) + 1;
+        let b = Math.floor(Math.random() * 9) + 1;
+        return { text: `${a} × ? ＝ ${a * b}`, answer: b };
+      }
 
-        if (timeLeft <= 0) {
-          clearInterval(timer);
-          timerEl.textContent = 'のこり：0:00';
+      function getRandomQuestion() {
+        return Math.random() < 0.5 ? makeQuestionTypeA() : makeQuestionTypeB();
+      }
 
-          // ★ 結果画面へ移動（ここなら確実に動く）
-          window.location.href = 'result.html';
-        }
-      }, 1000);
+      //------------------------------------
+      // 問題表示
+      //------------------------------------
+      let currentQuestion;
+      let score = 0;
 
-      // ===================================
-      // 数字の選択強調
-      // ===================================
+      function showQuestion() {
+        currentQuestion = getRandomQuestion();
+        document.getElementById('questionBox').textContent = currentQuestion.text;
+
+        // 前の選択をクリア
+        selectedAnswer = null;
+        numbers.forEach((n) => n.classList.remove('selected'));
+      }
+
+      //------------------------------------
+      // 数字クリック処理
+      //------------------------------------
+      let selectedAnswer = null;
       const numbers = document.querySelectorAll('.number-pad div');
 
       numbers.forEach((num) => {
         num.addEventListener('click', () => {
+          // ハイライト消す
           numbers.forEach((n) => n.classList.remove('selected'));
           num.classList.add('selected');
+
+          // 数字以外（← や ○）は無視
+          if (!isNaN(num.textContent)) {
+            selectedAnswer = Number(num.textContent);
+          }
         });
       });
 
-      // ===================================
-      // ゲージ上昇
-      // ===================================
+      //------------------------------------
+      // ○ボタンで答え確定
+      //------------------------------------
+      const confirmBtn = document.querySelector('.confirm-btn');
+
+      confirmBtn.addEventListener('click', () => {
+        if (selectedAnswer === null) return;
+
+        if (selectedAnswer === currentQuestion.answer) {
+          score++;
+          showQuestion(); // 次の問題へ
+        } else {
+          console.log('不正解！');
+        }
+      });
+
+      //------------------------------------
+      // ゲージ
+      //------------------------------------
       let gaugeValue = 60;
       const gaugeEl = document.querySelector('.gauge');
 
@@ -258,8 +295,31 @@
 
       document.querySelector('.go-btn').addEventListener('click', addGauge);
 
-      localStorage.setItem('score', 100); // ←実際のスコア
-      localStorage.setItem('level', 3); // ←実際のレベル
+      //------------------------------------
+      // タイマー
+      //------------------------------------
+      let timeLeft = 30;
+      const timerEl = document.querySelector('.timer');
+
+      const timer = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = `のこり：0:${String(timeLeft).padStart(2, '0')}`;
+
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          timerEl.textContent = 'のこり：0:00';
+
+          localStorage.setItem('score', score);
+          localStorage.setItem('level', 3);
+
+          window.location.href = 'result.html';
+        }
+      }, 1000);
+
+      //------------------------------------
+      // 最初の問題を出す
+      //------------------------------------
+      showQuestion();
     </script>
   </body>
 </html>
