@@ -98,6 +98,10 @@ body {
   margin-bottom: 25px; /* トピックグループとの間隔 */
 }
 
+.stars-display a {
+  text-decoration: none;
+}
+
 .star {
   font-size: 36px; /* 星のサイズを調整 */
   color: #ffc107; /* 明るい黄色 */
