@@ -78,14 +78,13 @@ body {
   max-width: 200px; /* カードの最大幅を固定気味に */
   background-color: #fef8ef; /* 薄いベージュ色 */
   border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px 15px; /* 上下左右のパディング調整 */
   display: flex;
   flex-direction: column;
   align-items: center;
   cursor: pointer;
   text-align: center;
-  height: 320px; /* カードの高さを統一 */
+  height: 130px; /* カードの高さを統一 */
   box-sizing: border-box;
 }
 
@@ -95,7 +94,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 25px; /* トピックグループとの間隔 */
+  margin-bottom: 50px; /* トピックグループとの間隔 */
 }
 
 .stars-display a {
@@ -114,7 +113,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px; /* トピック間のスペース */
+  gap: 15px; /* トピック間のスペース */
   width: 100%;
   flex-grow: 1; /* 残りのスペースを埋める */
   justify-content: flex-end; /* 下揃え */
@@ -122,14 +121,13 @@ body {
 
 /* 個別のトピック（計算内容）ラベル */
 .topic-label {
-  background-color: #e0e0e0; /* 薄いグレーの背景 */
+  background-color: #fef8ef; /* 薄いグレーの背景 */
   color: #555;
   border-radius: 30px;
   padding: 8px 15px;
   font-size: 14px;
   font-weight: 600;
   white-space: nowrap;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
   width: fit-content;
 }
 
@@ -170,8 +168,7 @@ body {
   .difficulty-card {
     flex-basis: 100%; /* 1列表示 */
     max-width: 280px; /* 中央に寄せるための最大幅 */
-    height: auto; /* 高さを内容に合わせる */
-    min-height: 280px; /* 最低限の高さを確保 */
+    height: 130px; /* 高さを内容に合わせる */
   }
   .stars-display {
     font-size: 32px;
