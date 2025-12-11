@@ -5,6 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Math Kids - 算数学習アプリ</title>
     <link rel="stylesheet" href="./signup.css" />
+
+    <style>
+      button a {
+        text-decoration: none;
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: black;
+      }
+    </style>
   </head>
   <body>
     <!-- ログイン画面 -->
@@ -26,8 +36,11 @@
             <input type="password" id="password" placeholder="パスワードを入力" />
           </div>
 
-          <button class="btn btn-primary" id="login-btn">ログイン</button>
-          <button class="btn btn-secondary" id="register-btn">しんきとうろく</button>
+          <div class="button-box">
+            <button class="login"><a href="index.html">ログイン</a></button>
+            <br />
+            <button class="btn"><a href="signup.html">しんきとうろく</a></button>
+          </div>
         </div>
       </div>
     </div>
