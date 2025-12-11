@@ -12,6 +12,14 @@ body {
   padding: 0; /* bodyのパディングを削除 */
 }
 
+button a {
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+  color: black;
+}
+
 /* ページ全体を囲むコンテナ (水色背景) */
 .page-container {
   background-color: #7ccdca; /* 画像のメインコンテンツ領域の水色背景 */
@@ -26,10 +34,9 @@ body {
 
 /* 画面上部のコントロール（もどるボタン） */
 .top-controls {
-  width: 100%;
-  display: flex;
-  justify-content: flex-end; /* 右寄せ */
-  margin-bottom: 20px;
+  position: fixed; /* ← 画面に固定 */
+  top: 30px; /* ← 上からの距離 */
+  right: 30px; /* ← 右からの距離 */
 }
 
 .back-button {
