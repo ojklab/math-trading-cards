@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ゲーム画面再現</title>
+    <style>
+      /* 全体のリセットと基本設定 */
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        /* 丸みのあるフォントを指定 */
+        font-family: 'M PLUS Rounded 1c', 'Hiragino Maru Gothic ProN', Meiryo, sans-serif;
+        background-color: #70c1bc; /* 背景のターコイズ色 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        padding: 20px;
+        color: #333;
+      }
+
+      /* メインコンテナ */
+      .container {
+        display: flex;
+        width: 100%;
+        max-width: 900px;
+        gap: 40px;
+        padding: 20px;
+      }
+
+      /* 共通カードスタイル */
+      .card {
+        background-color: #fdf8ed; /* オフホワイト */
+        border-radius: 25px;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* テキストの共通スタイル */
+      .text-info {
+        font-size: 18px;
+        margin-top: 8px;
+        margin-left: 10px;
+      }
+
+      /* --- 左カラム --- */
+      .left-column {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+
+      /* 敵カード */
+      .enemy-card {
+        width: 180px;
+        height: 220px;
+        font-size: 36px;
+        font-weight: bold;
+      }
+
+      /* プレイヤーカード（画像がないためCSSで簡易再現） */
+      .player-card-mock {
+        width: 180px;
+        height: 240px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        border: 4px solid #e0c0a0;
+        background-color: #f8e8d0;
+      }
+
+      .card-level {
+        align-self: flex-start;
+        background-color: #e09060;
+        color: white;
+        border-radius: 12px;
+        font-size: 14px;
+        padding: 3px 8px;
+        font-weight: bold;
+      }
+
+      .card-image-placeholder {
+        font-size: 60px;
+        color: #a0a0a0;
+      }
+
+      .card-name {
+        font-weight: bold;
+        color: #8b5a2b;
+        font-size: 18px;
+      }
+
+      .card-stats {
+        display: flex;
+        gap: 10px;
+        width: 100%;
+        justify-content: space-around;
+      }
+
+      .stat-box {
+        border: 2px solid #cda882;
+        border-radius: 8px;
+        padding: 5px 10px;
+        text-align: center;
+        font-size: 14px;
+        color: #8b5a2b;
+        font-weight: bold;
+      }
+
+      /* --- 右カラム --- */
+      .right-column {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        position: relative; /* goボタンの基準点 */
+      }
+
+      /* タイマー */
+      .timer {
+        text-align: right;
+        font-size: 32px;
+        font-weight: bold;
+        letter-spacing: 3px;
+      }
+
+      /* 問題エリア */
+      .question-area {
+        height: 160px;
+        font-size: 56px;
+        font-weight: bold;
+      }
+
+      /* テンキーエリア */
+      .numpad-grid {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr); /* 6列 */
+        gap: 15px;
+        padding: 30px 25px;
+      }
+
+      .num-btn {
+        background: none;
+        border: none;
+        font-size: 40px;
+        font-family: inherit;
+        color: #333;
+        cursor: pointer;
+        padding: 5px;
+      }
+
+      /* ゲージ周り */
+      .gauge-wrapper {
+        margin-top: auto; /* 下に寄せる */
+        width: 85%; /* goボタンのスペースを空ける */
+        padding-bottom: 10px;
+      }
+
+      .gauge-label {
+        font-size: 16px;
+        margin-bottom: 5px;
+        margin-left: 10px;
+      }
+
+      .gauge-bar-bg {
+        background-color: #fdf8ed;
+        border-radius: 25px;
+        height: 45px;
+        overflow: hidden;
+        box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+
+      .gauge-bar-fill {
+        background-color: #f08070; /* サーモンピンク */
+        width: 88%; /* ゲージの溜まり具合（仮） */
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      /* go!ボタン */
+      .go-button {
+        background-color: #f08070;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+        font-weight: bold;
+        font-family: inherit;
+        cursor: pointer;
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+
+        /* 右下にはみ出させる配置 */
+        position: absolute;
+        bottom: -20px;
+        right: -20px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-column">
+        <div class="enemy-area">
+          <div class="card enemy-card">てき</div>
+          <div class="text-info">HP 30</div>
+          <div class="text-info" style="font-size: 14px">+100(スコア)</div>
+        </div>
+
+        <div class="player-area">
+          <div class="card player-card-mock">
+            <div class="card-level">LEVEL 3</div>
+            <div class="card-image-placeholder">🐘</div>
+            <div class="card-name">ELEPHANT</div>
+            <div class="card-stats">
+              <div class="stat-box">HP<br />10</div>
+              <div class="stat-box">POWER<br />5</div>
+            </div>
+          </div>
+          <div class="text-info">HP 30 なまえ</div>
+          <div class="text-info">Next ××</div>
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="timer">のこり : 0 : 3 0</div>
+
+        <div class="question-area card">1 + 2 = ?</div>
+
+        <div class="numpad-area card numpad-grid">
+          <button class="num-btn">1</button>
+          <button class="num-btn">2</button>
+          <button class="num-btn">3</button>
+          <button class="num-btn">4</button>
+          <button class="num-btn">5</button>
+          <button class="num-btn">←</button>
+
+          <button class="num-btn">6</button>
+          <button class="num-btn">7</button>
+          <button class="num-btn">8</button>
+          <button class="num-btn">9</button>
+          <button class="num-btn">0</button>
+          <button class="num-btn">〇</button>
+        </div>
+
+        <div class="gauge-wrapper">
+          <div class="gauge-label">必殺技なまえ</div>
+          <div class="gauge-bar-bg">
+            <div class="gauge-bar-fill">ゲージ</div>
+          </div>
+        </div>
+
+        <button class="go-button">go!</button>
+      </div>
+    </div>
+  </body>
+</html>
